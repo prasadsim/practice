@@ -1,3 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.clearfix:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
 body{
     font-size: 18px;
     font-family:Arial, Helvetica, sans-serif;
@@ -5,19 +18,71 @@ body{
 
 h1,h2,h3{
     color:green;
-    
+    padding-bottom: 20px;
+    border-bottom: 1px solid black;
 }
 
 h1{
     font-size: 40px;
-}
+    margin-bottom: 20px;
+   }
 
 h2{
     font-size: 30px;
+    margin-bottom: 10px;
 }
 h3{
     font-size: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid black;
+    padding-top: 20px;
+    border-top: 1px solid black;
 }
-p{
+
+.main-text{
     text-align: justify;
+    margin-bottom: 20px;
+}
+
+.author-text{
+    font-size: 30px;
+}
+
+.container{
+    width: 1140px;
+    margin: 20px auto 0 auto;
+}
+.blog-post{
+    width: 75%;
+    float: left;
+    padding-right: 30px;
+}
+
+.other-post{
+    /* margin: 10px; */
+    width: 25%;
+    float: left;
+    
+}
+.author-post{
+    padding-top: 20px;
+    border-top: 1px solid rgb(68, 55, 55);
+    float: left;
+    margin-top: 55px;
+    margin-left: 25px;
+}
+
+.other{
+    margin-bottom: 40px;
+}
+
+.author-post img{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    float: left;
+}
+
+.blog-post img{
+    width: 75%;
 }
