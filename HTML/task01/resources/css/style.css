@@ -9,13 +9,15 @@
     box-sizing: border-box;
 }
 
-html {
+html,
+body {
     background-color: #fff;
     color: #555;
     font-family: 'Lato', 'Arial', sans-serif;
     font-weight: 300;
     font-size: 20px;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
 }
 
 .clearfix {zoom: 1}
@@ -297,6 +299,10 @@ header{
     background-color: #f4f4f4;
 }
 
+.step-box{
+    margin-top: 30px;
+}
+
 .step-box:first-child{
     text-align: right;
     padding-right: 3%;
@@ -325,6 +331,7 @@ header{
     margin-bottom: 80px;
 }
 
+
 .works-step div{
     color: #e67e22;
     border: 2px solid #e67e22;
@@ -333,10 +340,10 @@ header{
     height: 55px;
     width: 55px;
     text-align: center;
-    padding: 5px;
-    float: left;
+    padding: 5px;    
     font-size: 150%;
     margin-right: 25px;
+    float: left;
 }
 
 .btn-app img{
