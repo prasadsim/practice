@@ -1,0 +1,92 @@
+<html>
+
+<head>
+    <title>TODO LIST</title>
+    <style>
+        h1 {
+            font-family: fantasy;
+            color: rgba(58, 11, 11, 0.562);
+        }
+
+        body {
+            text-align: center;
+            margin-top: 50px;
+            background-color: rgb(217, 235, 218);
+        }
+
+        #textbox {
+            background-color: rgb(180, 238, 218);
+            border-radius: 5px;
+            height: 30px;
+            width: 200px;
+        }
+
+        #addbtn {
+            background-color: rgb(85, 224, 85);
+        }
+
+        .btn {
+            border-radius: 50px;
+            height: 30px;
+            width: 30px;
+            margin-left: 10px;
+        }
+
+        #closebtn {
+            background-color: rgb(230, 100, 100);
+        }
+
+        #myul {
+            list-style-type: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>TODO LIST</h1>
+    <div id="textarea">
+        <input placeholder="value ..." type="text" id="textbox">
+        <button onclick="myFunction()" id="addbtn" class="btn"><span> + </span></button>
+    </div>
+
+    <div id="ulcontent">
+        <ul id="myul"></ul>
+    </div>
+
+    <script>
+        function myFunction() {
+            var text = document.getElementById("textbox").value;
+            if (text.trim() == "") {
+                alert("Enter Something!!!");
+                document.getElementById("textbox").value = "";
+                return;
+            }
+            document.getElementById("textbox").value = "";
+            var closebtn = document.createElement("button");
+            closebtn.textContent = " x ";
+            closebtn.id = "closebtn";
+            closebtn.className = "btn";
+
+            var li = document.createElement("li");
+            li.style.fontSize = "20px"
+            li.style.marginTop = "10px"
+            li.append(text);
+            li.append(closebtn);
+            var ul = document.getElementById("myul");
+            ul.appendChild(li);
+
+            closebtn.onclick = function () {
+                var choice = confirm("Sure to remove this todo : " + this.parentElement.textContent);
+                if (choice) {
+                    var removeLi = this.parentElement;
+                    removeLi.remove();
+                }
+            }
+        }
+
+    </script>
+</body>
+
+
+
+</html>
