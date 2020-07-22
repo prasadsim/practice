@@ -27,23 +27,21 @@
         <option>ORANGE</option>
         <option>YELLOW</option>
     </select>
+
     <script>
+        var colors = [];
+        colors.push({ text: "RED", value: "#E74C3C" });
+        colors.push({ text: "BLUE", value: "#3498DB" });
+        colors.push({ text: "GREEN", value: "#48C9B0" });
+        colors.push({ text: "YELLOW", value: "#F4D03F" });
+        colors.push({ text: "ORANGE", value: "#FFA500" });
+
         function myFunction() {
             var selected = document.getElementById("dropdown").value;
-            if (selected == "RED") {
-                document.body.style.backgroundColor = "#E74C3C";
-            }
-            if (selected == "BLUE") {
-                document.body.style.backgroundColor = "#3498DB";
-            }
-            if (selected == "GREEN") {
-                document.body.style.backgroundColor = "#48C9B0";
-            }
-            if (selected == "YELLOW") {
-                document.body.style.backgroundColor = "#F4D03F";
-            }
-            if (selected == "ORANGE") {
-                document.body.style.backgroundColor = "#FFA500";
+            for (var i = 0; i < colors.length; i++) {
+                if (selected == colors[i].text) {
+                    document.body.style.backgroundColor = colors[i].value;
+                }
             }
             if (selected == "-- select --") {
                 document.body.style.backgroundColor = "";

@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <title>SLIDER</title>
+    <style>
+        body {
+            text-align: center;
+            margin-top: 50px;
+            background-color: rgb(217, 235, 218);
+        }
+
+        h1 {
+            font-family: fantasy;
+            font-weight: 300;
+        }
+
+        #slider {
+            width: 300px;
+        }
+    </style>
+
+<body>
+    <h1>Slider</h1>
+    1 <input type="range" min="1" max="100" value="1" id="slider"> 100 <br><br>
+    <div id="buttons"></div><br><br>
+
+    <script>
+        var slider = document.getElementById("slider");
+        slider.oninput = function () {
+            var button = document.createElement("button");
+            button.textContent = this.value;
+            button.id = this.value;
+            button.addEventListener("click", btnclicked);
+            document.querySelector("#buttons").appendChild(button);
+        }
+        var pele = document.createElement("p");
+        function btnclicked() {
+            pele.textContent = "Button " + this.id + " is clicked!!!";
+        }
+        document.body.appendChild(pele);
+
+
+    </script>
+</body>
+</head>

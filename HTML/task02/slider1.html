@@ -1,0 +1,35 @@
+<html>
+
+<head>
+    <title>SLIDER</title>
+    <style>
+        body {
+            text-align: center;
+            margin-top: 50px;
+            background-color: rgb(217, 235, 218);
+        }
+
+        h1 {
+            font-family: fantasy;
+            font-weight: 300;
+        }
+
+        #slider {
+            width: 300px;
+        }
+    </style>
+
+<body>
+    <h1>Slider</h1>
+    1 <input type="range" min="1" max="100" value="50" id="slider"> 100 <br>
+
+    <script>
+        var slider = document.getElementById("slider");
+        var label = document.createElement("label");
+        slider.oninput = function () {
+            label.textContent = "Range is " + this.value;
+        }
+        document.body.appendChild(label);
+    </script>
+</body>
+</head>

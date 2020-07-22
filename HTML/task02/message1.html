@@ -1,0 +1,38 @@
+<html>
+
+<head>
+    <title>MESSAGE</title>
+    <style>
+        body {
+            text-align: center;
+            margin-top: 50px;
+            background-color: rgb(217, 235, 218);
+        }
+
+        h1 {
+            font-family: monospace;
+        }
+
+        #textarea {
+            border-radius: 5px;
+            border-color: unset;
+        }
+    </style>
+</head>
+
+<body>
+    <label>Enter : </label>
+    <input type="textarea" id="textarea"><br>
+    <script>
+        var textarea = document.getElementById("textarea");
+        textarea.addEventListener("keyup",print);
+        var label = document.createElement("label");
+
+        function print(){
+            label.textContent=textarea.value.toUpperCase();
+        }
+        document.body.appendChild(label);                
+    </script>
+</body>
+
+</html>
