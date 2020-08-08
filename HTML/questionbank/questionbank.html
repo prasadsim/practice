@@ -1,0 +1,244 @@
+<html>
+
+<head>
+    <title>Question Bank</title>
+    <style>
+        body {
+            text-align: center;
+            margin-top: 50px;
+            background-color: rgb(235, 235, 217);
+        }
+
+        #startbtn {
+            margin-top: 200px;
+            width: 200px;
+            height: 100px;
+            font-size: 40px;
+            border-radius: 50px;
+            border: solid 3px green;
+            font-family: fantasy;
+        }
+
+        #nextbtn {
+            font-size: 25px;
+            height: 40px;
+            width: auto;
+            border-radius: 15px;
+            border: 2px solid black;
+        }
+
+        #retake {
+            font-size: 25px;
+            height: 40px;
+            width: auto;
+            border-radius: 15px;
+            border: 2px solid black;
+        }
+
+        .menubtn {
+            height: 30px;
+            width: 30px;
+            margin-right: 10px;
+            border-radius: 5px;
+            border: solid 2px black;
+        }
+
+        li {
+            font-size: 20px;
+            margin-left: 25%;
+            margin-top: 5px;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div1"><button id="startbtn">START</button></div>
+
+    <div id="qblock" style="display: none;">
+        <div id="menu">
+
+        </div>
+        <h2 id="qno"></h2>
+        <h1 id="qtext"></h1>
+        <ul id="optionlist" style="list-style: none;">
+            <li>
+                <input type="radio" id="1" name="option" value="1">
+                <label id="option1" for="1"></label>
+            </li>
+            <li>
+                <input type="radio" id="2" name="option" value="2">
+                <label id="option2" for="2"></label>
+            </li>
+            <li>
+                <input type="radio" id="3" name="option" value="3">
+                <label id="option3" for="3"></label>
+            </li>
+            <li>
+                <input type="radio" id="4" name="option" value="4">
+                <label id="option4" for="4"></label>
+            </li>
+        </ul>
+
+        <button id="nextbtn">next</button>
+    </div>
+
+    <div id="end"></div>
+
+    <script>
+        var index = 0;
+        var correctanswer = 0;
+        var options = document.getElementsByName("option");
+
+        document.querySelector("#startbtn").addEventListener("click", startbtnClicked);
+        function startbtnClicked() {
+            // document.getElementById("div1").style.display = "none";
+            this.parentElement.style.display = "none";
+            printMenu();
+            printQuestions(index);
+        }
+
+        function printMenu() {
+            var menubar = document.getElementById("menu");
+            for (var i = 0; i < questions.length; i++) {
+                var menubtn = document.createElement("button");
+                menubtn.value = i;
+                menubtn.id = "menubtn" + i;
+                menubtn.className = "menubtn";
+                menubtn.textContent = i + 1;
+                menubtn.addEventListener("click", goToQuestion);
+                menubar.appendChild(menubtn);
+            }
+        }
+
+        function goToQuestion() {
+            index = this.value;
+            printQuestions(index);
+        }
+
+        function printQuestions(index) {
+            document.getElementById("qblock").style.display = "block";
+            document.getElementById("qno").textContent = "Question - " + questions[index].n + " / " + questions.length;
+            document.getElementById("qtext").textContent = questions[index].text;
+            document.getElementById("option1").textContent = questions[index].o1;
+            options[0] = questions[index].o1;
+            document.getElementById("option2").textContent = questions[index].o2;
+            options[1] = questions[index].o2;
+            document.getElementById("option3").textContent = questions[index].o3;
+            options[2] = questions[index].o3;
+            document.getElementById("option4").textContent = questions[index].o4;
+            options[3] = questions[index].o4;
+            if (index + 1 == questions.length) {
+                document.getElementById("nextbtn").textContent = "finish";
+            }
+            document.getElementById("nextbtn").addEventListener("click", nextbtnClicked);
+        }
+
+        function nextbtnClicked() {
+            for (var i = 0; i < 4; i++) {
+                if (options[i].checked) {
+                    if (options[i].value == questions[index].answer) {
+                        correctanswer++;
+                    }
+                    document.getElementById("menubtn" + index).style.backgroundColor = "#33ff33";
+                }
+                options[i].checked = false;
+            }
+            index++;
+
+            if (index == questions.length) {
+                getscore();
+            } else {
+                printQuestions(index);
+            }
+        }
+
+        function getscore() {
+            // document.getElementById("end").appendChild(document.getElementById("menu"));
+            document.getElementById("qblock").style.display = "none";
+            document.getElementById("end").style.display = "block";
+            var endblock = document.getElementById("end");
+            var percentage = correctanswer / questions.length;
+            percentage = percentage * 100;
+            var h1 = document.createElement("h1");
+            h1.textContent = "You Scored - " + percentage + "%";
+            var h2 = document.createElement("h2");
+            h2.style.fontSize = "70px";
+            if (percentage < 60) {
+                h2.textContent = "FAIL";
+                h2.style.color = "red";
+            } else {
+                h2.textContent = "PASS";
+                h2.style.color = "green";
+            }
+            endblock.appendChild(h1);
+            endblock.appendChild(h2);
+
+            var retakebtn = document.createElement("button");
+            retakebtn.id = "retake";
+            retakebtn.textContent = "retake";
+            endblock.appendChild(retakebtn);
+            retakebtn.onclick = function () {
+                for (var i = 0; i < questions.length; i++) {
+                    document.getElementById("menubtn" + i).style.backgroundColor = "";
+                }
+                document.getElementById("nextbtn").textContent = "next";
+                document.getElementById("end").style.display = "none";
+                index = 0;
+                // endblock.removeChild(document.getElementById("menu"));
+                correctanswer = 0;
+                endblock.removeChild(h1);
+                endblock.removeChild(h2);
+                // printMenu();
+                printQuestions(index);
+                // startbtnClicked();
+                endblock.removeChild(retakebtn);
+            }
+        }
+
+
+        var questions = [{
+            n: 1,
+            text: "What is the Capital of India?",
+            o1: 'mumbai',
+            o2: 'goa',
+            o3: 'delhi',
+            o4: 'punjab',
+            answer: 3,
+        }, {
+            n: 2,
+            text: "Where is Taj Mahal located in India?",
+            o1: 'Telangana',
+            o2: 'Maharastra',
+            o3: 'Kerla',
+            o4: 'Agra',
+            answer: 4,
+        }, {
+            n: 3,
+            text: "Which one is markup language?",
+            o1: 'html',
+            o2: 'c',
+            o3: 'java',
+            o4: 'python',
+            answer: 1,
+        }, {
+            n: 4,
+            text: "What is the answer if any number is divided by zero?",
+            o1: 'zero',
+            o2: 'undefined',
+            o3: 'Both of the above',
+            o4: 'none of the above',
+            answer: 2,
+        }, {
+            n: 5,
+            text: "'OS' computer abbreviation usually means?",
+            o1: 'Order of Significance',
+            o2: 'Open Software',
+            o3: 'Operating System',
+            o4: 'Optical Sensor',
+            answer: 3,
+        }];
+    </script>
+</body>
+
+</html>
